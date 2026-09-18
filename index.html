@@ -29,11 +29,31 @@
 <header>
   <div class="wrap nav">
     <a class="brand" href="index.html"><span>Tech</span>Toolbox <b>SA</b></a>
-    <nav>
+
+    <!-- Desktop links -->
+    <nav class="nav-links">
       <a href="#tools">Tools</a>
       <a href="#guides">Guides</a>
       <a href="#about">About</a>
     </nav>
+
+    <!-- Mobile hamburger -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#tools">Tools</a>
+      <a href="#guides">Guides</a>
+      <a href="#about">About</a>
+      <a href="subnet-calculator.html">Subnet Calculator</a>
+      <a href="cctv-storage-calculator.html">CCTV Storage Calculator</a>
+      <a href="poe-calculator.html">PoE Calculator</a>
+      <a href="ip-tools.html">IP Tools</a>
+    </div>
   </div>
 </header>
 
@@ -61,11 +81,30 @@
 </section>
 
 <section id="guides" class="wrap section">
-  <div class="section-head"><div><p class="eyebrow">GUIDES</p><h2>Learn while you troubleshoot</h2></div></div>
+  <div class="section-head">
+    <div><p class="eyebrow">GUIDES</p><h2>Learn while you troubleshoot</h2></div>
+  </div>
   <div class="guide-grid">
-    <article class="guide"><h3>What is a subnet?</h3><p>A plain-English introduction to IP networks, masks, gateways and host ranges.</p></article>
-    <article class="guide"><h3>Why can devices on different subnets communicate?</h3><p>Understand routers, gateways, routing tables and how one PC can reach multiple networks.</p></article>
-    <article class="guide"><h3>CCTV bandwidth basics</h3><p>Understand bitrate, retention, resolution and why camera storage estimates vary.</p></article>
+    <a class="guide" href="guide-what-is-a-subnet.html">
+      <h3>What is a subnet?</h3>
+      <p>A plain-English introduction to IP networks, masks, gateways and host ranges.</p>
+      <span class="go">Read guide →</span>
+    </a>
+    <a class="guide" href="guide-different-subnets.html">
+      <h3>Why can devices on different subnets communicate?</h3>
+      <p>Understand routers, gateways, routing tables and how one PC can reach multiple networks.</p>
+      <span class="go">Read guide →</span>
+    </a>
+    <a class="guide" href="guide-cctv-bandwidth.html">
+      <h3>CCTV bandwidth basics</h3>
+      <p>Understand bitrate, retention, resolution and why camera storage estimates vary.</p>
+      <span class="go">Read guide →</span>
+    </a>
+    <a class="guide" href="guide-poe-power-budget.html">
+      <h3>How to calculate PoE power budget</h3>
+      <p>Avoid overloaded switches and brown-outs by sizing your PoE correctly.</p>
+      <span class="go">Read guide →</span>
+    </a>
   </div>
 </section>
 
@@ -76,7 +115,29 @@
 </section>
 </main>
 
-<footer><div class="wrap"><strong>TechToolbox SA</strong><span>Free practical IT tools.</span></div></footer>
+<footer>
+  <div class="wrap">
+    <strong>TechToolbox SA</strong>
+    <span>Free practical IT tools.</span>
+  </div>
+</footer>
 
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('mobileMenu');
+
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('active');
+    menu.classList.toggle('open');
+  });
+
+  // Close menu when a link is clicked
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      toggle.classList.remove('active');
+      menu.classList.remove('open');
+    });
+  });
+</script>
 </body>
 </html>

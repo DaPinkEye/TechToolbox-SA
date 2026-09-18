@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why Devices on Different Subnets Can Communicate — TechToolbox SA</title>
+  <meta name="description" content="Understand how routers, gateways and routing tables allow devices on different subnets to talk to each other.">
+
+  <link rel="canonical" href="https://dapinkeye.github.io/TechToolbox-SA/guide-different-subnets.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://dapinkeye.github.io/TechToolbox-SA/guide-different-subnets.html" />
+  <meta property="og:title" content="Why Devices on Different Subnets Can Communicate" />
+  <meta property="og:description" content="Understand how routers, gateways and routing tables allow devices on different subnets to talk to each other." />
+  <meta property="og:site_name" content="TechToolbox SA" />
+  <meta property="og:locale" content="en_ZA" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><span>Tech</span>Toolbox <b>SA</b></a>
+    <nav class="nav-links">
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#guides">Guides</a>
+      <a href="index.html#about">About</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#guides">Guides</a>
+      <a href="index.html#about">About</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap article-page">
+  <a class="back" href="index.html#guides">← Back to guides</a>
+
+  <article class="article">
+    <p class="eyebrow">NETWORKING GUIDE</p>
+    <h1>Why can devices on different subnets communicate?</h1>
+    <p class="meta">Routers, gateways and routing explained simply</p>
+
+    <p>Devices on the <strong>same subnet</strong> can talk directly to each other using ARP and Layer 2 switching. Devices on <strong>different subnets</strong> cannot do this — they need a router (or Layer 3 switch) to forward the traffic.</p>
+
+    <h2>The role of the default gateway</h2>
+    <p>When a device wants to send a packet to an IP that is <em>not</em> on its own subnet, it looks at its routing table. In almost every normal computer, phone or camera the only route is:</p>
+
+    <div class="callout">
+      “If the destination is not on my local network → send it to the default gateway.”
+    </div>
+
+    <p>The default gateway is almost always the router’s IP address on that subnet (commonly <code>.1</code> or <code>.254</code>).</p>
+
+    <h2>What the router does</h2>
+    <ol>
+      <li>Receives the packet from the source device</li>
+      <li>Looks at the destination IP</li>
+      <li>Checks its own routing table to see which interface (or next hop) should be used</li>
+      <li>Forwards the packet out of the correct interface</li>
+      <li>The process continues until the packet reaches the destination subnet</li>
+    </ol>
+
+    <h2>Simple real-world example</h2>
+    <p>Office network:</p>
+    <ul>
+      <li>Staff PCs: <code>192.168.10.0/24</code> — gateway <code>192.168.10.1</code></li>
+      <li>CCTV cameras: <code>192.168.20.0/24</code> — gateway <code>192.168.20.1</code></li>
+    </ul>
+
+    <p>Both gateways are interfaces on the same router (or firewall). When a PC at <code>192.168.10.50</code> wants to reach a camera at <code>192.168.20.15</code>:</p>
+    <ol>
+      <li>PC realises 192.168.20.15 is not local → sends packet to 192.168.10.1</li>
+      <li>Router receives it, sees the destination is on the 192.168.20.0/24 network</li>
+      <li>Router forwards the packet out of its 192.168.20.1 interface</li>
+      <li>Camera receives the packet and can reply the same way</li>
+    </ol>
+
+    <h2>When communication fails</h2>
+    <p>Common reasons devices on different subnets cannot talk:</p>
+    <ul>
+      <li>Wrong or missing default gateway on one of the devices</li>
+      <li>Router does not have a route to the destination network</li>
+      <li>Firewall / ACL is blocking the traffic</li>
+      <li>One of the devices has an incorrect subnet mask</li>
+      <li>VLAN misconfiguration (devices are isolated at Layer 2)</li>
+    </ul>
+
+    <h2>Quick field checklist</h2>
+    <ol>
+      <li>Can the device ping its own gateway?</li>
+      <li>Can the device ping the far-side gateway?</li>
+      <li>Can the device ping the final destination?</li>
+      <li>Check the subnet mask and gateway on both ends</li>
+      <li>Check routing table or firewall rules if the first three fail</li>
+    </ol>
+
+    <p>Understanding this flow is one of the most useful skills for any network or CCTV technician.</p>
+
+    <div class="related">
+      <h3>Related guides &amp; tools</h3>
+      <p><a href="guide-what-is-a-subnet.html">What is a subnet?</a></p>
+      <p><a href="subnet-calculator.html">Subnet Calculator</a></p>
+      <p><a href="ip-tools.html">IP Tools</a></p>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>TechToolbox SA</strong>
+    <span>Free practical IT tools.</span>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('mobileMenu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      menu.classList.toggle('open');
+    });
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('active');
+        menu.classList.remove('open');
+      });
+    });
+  }
+</script>
+</body>
+</html>

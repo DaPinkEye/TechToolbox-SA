@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CCTV Bandwidth Basics — Bitrate, Retention & Storage — TechToolbox SA</title>
+  <meta name="description" content="Understand CCTV bitrate, resolution, retention and how they affect hard drive storage requirements.">
+
+  <link rel="canonical" href="https://dapinkeye.github.io/TechToolbox-SA/guide-cctv-bandwidth.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://dapinkeye.github.io/TechToolbox-SA/guide-cctv-bandwidth.html" />
+  <meta property="og:title" content="CCTV Bandwidth Basics — Bitrate, Retention & Storage" />
+  <meta property="og:description" content="Understand CCTV bitrate, resolution, retention and how they affect hard drive storage requirements." />
+  <meta property="og:site_name" content="TechToolbox SA" />
+  <meta property="og:locale" content="en_ZA" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><span>Tech</span>Toolbox <b>SA</b></a>
+    <nav class="nav-links">
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#guides">Guides</a>
+      <a href="index.html#about">About</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#guides">Guides</a>
+      <a href="index.html#about">About</a>
+      <a href="cctv-storage-calculator.html">CCTV Storage Calculator</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap article-page">
+  <a class="back" href="index.html#guides">← Back to guides</a>
+
+  <article class="article">
+    <p class="eyebrow">CCTV GUIDE</p>
+    <h1>CCTV bandwidth basics</h1>
+    <p class="meta">Bitrate, resolution, retention and why storage estimates vary</p>
+
+    <p>When sizing a CCTV system, the two biggest questions are almost always:</p>
+    <ol>
+      <li>How much network bandwidth will the cameras use?</li>
+      <li>How much hard-drive space do I need for the required retention?</li>
+    </ol>
+
+    <p>Both answers depend mainly on <strong>bitrate</strong>.</p>
+
+    <h2>What is bitrate?</h2>
+    <p>Bitrate is the amount of data the camera sends every second, measured in Mbps (megabits per second). Higher bitrate = better image quality and smoother motion, but more storage and more network load.</p>
+
+    <h2>What affects bitrate?</h2>
+    <ul>
+      <li><strong>Resolution</strong> – 4K uses far more data than 1080p</li>
+      <li><strong>Frame rate (fps)</strong> – 25 fps uses more than 12 fps</li>
+      <li><strong>Codec</strong> – H.265 is roughly 30–50% more efficient than H.264</li>
+      <li><strong>Scene complexity</strong> – busy streets with lots of movement need higher bitrate than quiet corridors</li>
+      <li><strong>Compression / quality setting</strong> – higher quality = higher bitrate</li>
+      <li><strong>Day vs night</strong> – infrared night vision often increases bitrate</li>
+    </ul>
+
+    <h2>Typical bitrate ranges (real-world)</h2>
+    <ul>
+      <li>2MP (1080p) H.264 – 2 to 4 Mbps</li>
+      <li>2MP H.265 – 1.5 to 3 Mbps</li>
+      <li>4MP / 5MP H.265 – 3 to 6 Mbps</li>
+      <li>4K (8MP) H.265 – 6 to 12 Mbps (sometimes higher)</li>
+    </ul>
+
+    <div class="callout">
+      These are averages. Always check the manufacturer’s datasheet and, if possible, measure the actual bitrate on a live camera in the real environment.
+    </div>
+
+    <h2>How storage is calculated</h2>
+    <p>The basic formula is:</p>
+    <p><strong>Storage (GB) ≈ Number of cameras × Bitrate (Mbps) × 86400 × Days ÷ 8 ÷ 1000</strong></p>
+
+    <p>Or in simpler terms: more cameras, higher bitrate or longer retention = more hard drive space needed.</p>
+
+    <p>You can use the free <a href="cctv-storage-calculator.html">CCTV Storage Calculator</a> on this site to get a quick estimate.</p>
+
+    <h2>Common mistakes that cause problems</h2>
+    <ul>
+      <li>Using the manufacturer’s “best case” bitrate instead of a realistic average</li>
+      <li>Forgetting that continuous recording uses far more space than motion-only</li>
+      <li>Not leaving headroom on the hard drive (RAID, formatting overhead, etc.)</li>
+      <li>Under-estimating night-time bitrate on infrared cameras</li>
+      <li>Ignoring the network uplink when many cameras stream to a remote NVR or VMS</li>
+    </ul>
+
+    <h2>Practical tip</h2>
+    <p>When quoting a job, calculate storage at both the expected average bitrate and a slightly higher “worst case” bitrate. This protects you if the customer later turns up the quality settings or adds more cameras.</p>
+
+    <div class="related">
+      <h3>Related tools &amp; guides</h3>
+      <p><a href="cctv-storage-calculator.html">CCTV Storage Calculator</a></p>
+      <p><a href="guide-poe-power-budget.html">How to calculate PoE power budget</a></p>
+      <p><a href="poe-calculator.html">PoE Calculator</a></p>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>TechToolbox SA</strong>
+    <span>Free practical IT tools.</span>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('mobileMenu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      menu.classList.toggle('open');
+    });
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('active');
+        menu.classList.remove('open');
+      });
+    });
+  }
+</script>
+</body>
+</html>

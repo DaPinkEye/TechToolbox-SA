@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What is a Subnet? Explained Simply — TechToolbox SA</title>
+  <meta name="description" content="A plain-English explanation of what a subnet is, how subnet masks work, and why network technicians use them every day.">
+
+  <link rel="canonical" href="https://dapinkeye.github.io/TechToolbox-SA/guide-what-is-a-subnet.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://dapinkeye.github.io/TechToolbox-SA/guide-what-is-a-subnet.html" />
+  <meta property="og:title" content="What is a Subnet? Explained Simply — TechToolbox SA" />
+  <meta property="og:description" content="A plain-English explanation of what a subnet is, how subnet masks work, and why network technicians use them every day." />
+  <meta property="og:site_name" content="TechToolbox SA" />
+  <meta property="og:locale" content="en_ZA" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="What is a Subnet? Explained Simply" />
+  <meta name="twitter:description" content="A plain-English explanation of subnets for technicians." />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><span>Tech</span>Toolbox <b>SA</b></a>
+    <nav class="nav-links">
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#guides">Guides</a>
+      <a href="index.html#about">About</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#guides">Guides</a>
+      <a href="index.html#about">About</a>
+      <a href="subnet-calculator.html">Subnet Calculator</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap article-page">
+  <a class="back" href="index.html#guides">← Back to guides</a>
+
+  <article class="article">
+    <p class="eyebrow">NETWORKING GUIDE</p>
+    <h1>What is a subnet?</h1>
+    <p class="meta">Practical explanation for IT technicians and installers</p>
+
+    <p>A <strong>subnet</strong> (short for sub-network) is simply a smaller, logical division of a larger IP network. Instead of putting every device on one giant flat network, we break it into manageable pieces.</p>
+
+    <p>Think of a big office building. The whole building has one street address, but inside you have different floors and rooms. A subnet is like one floor — devices on the same floor can talk to each other easily, while traffic going to other floors has to go through a “lift” (the router / gateway).</p>
+
+    <h2>Why do we use subnets?</h2>
+    <ul>
+      <li><strong>Organisation</strong> – Separate cameras, staff PCs, guest Wi-Fi, printers, etc.</li>
+      <li><strong>Security</strong> – You can put firewall rules between subnets.</li>
+      <li><strong>Performance</strong> – Broadcast traffic stays inside its own subnet instead of flooding the whole network.</li>
+      <li><strong>IP management</strong> – Easier to plan and track addresses.</li>
+    </ul>
+
+    <h2>The two parts of an IP address</h2>
+    <p>Every IPv4 address (e.g. <code>192.168.1.50</code>) is made of two parts:</p>
+    <ol>
+      <li><strong>Network portion</strong> – identifies which subnet the device belongs to</li>
+      <li><strong>Host portion</strong> – identifies the specific device inside that subnet</li>
+    </ol>
+
+    <p>The <strong>subnet mask</strong> (or CIDR prefix) tells us where the split is.</p>
+
+    <div class="callout">
+      <strong>Example:</strong> IP <code>192.168.1.50</code> with mask <code>255.255.255.0</code> (or <code>/24</code>)<br>
+      Network = <code>192.168.1.0</code><br>
+      Host = <code>.50</code><br>
+      Usable hosts = 192.168.1.1 – 192.168.1.254
+    </div>
+
+    <h2>Common subnet sizes technicians see every day</h2>
+    <ul>
+      <li><code>/24</code> (255.255.255.0) – 254 usable hosts – most common for small offices and CCTV</li>
+      <li><code>/25</code> – 126 hosts</li>
+      <li><code>/26</code> – 62 hosts</li>
+      <li><code>/27</code> – 30 hosts</li>
+      <li><code>/28</code> – 14 hosts</li>
+      <li><code>/30</code> – 2 hosts – often used for point-to-point links</li>
+    </ul>
+
+    <h2>Key terms you need to know</h2>
+    <ul>
+      <li><strong>Network address</strong> – the first address in the range (not usable by a device)</li>
+      <li><strong>Broadcast address</strong> – the last address (also not usable)</li>
+      <li><strong>Gateway / Default gateway</strong> – usually the first usable IP (e.g. .1) – this is the router that lets traffic leave the subnet</li>
+      <li><strong>Usable host range</strong> – everything between network and broadcast</li>
+    </ul>
+
+    <h2>Quick tip for the field</h2>
+    <p>When a device cannot talk to another device, one of the first checks is: “Are they on the same subnet?” If the network portions are different, traffic <em>must</em> go through a router. If there is no route, they will never communicate.</p>
+
+    <p>You can use the free <a href="subnet-calculator.html">Subnet Calculator</a> on this site to quickly work out network, broadcast and usable range for any address and prefix.</p>
+
+    <div class="related">
+      <h3>Related guides</h3>
+      <p><a href="guide-different-subnets.html">Why can devices on different subnets communicate?</a></p>
+      <p><a href="guide-poe-power-budget.html">How to calculate PoE power budget</a></p>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>TechToolbox SA</strong>
+    <span>Free practical IT tools.</span>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('mobileMenu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      menu.classList.toggle('open');
+    });
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('active');
+        menu.classList.remove('open');
+      });
+    });
+  }
+</script>
+</body>
+</html>

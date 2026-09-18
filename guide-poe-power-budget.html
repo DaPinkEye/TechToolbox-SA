@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Calculate PoE Power Budget — TechToolbox SA</title>
+  <meta name="description" content="Learn how to correctly calculate PoE power budget so your switches and cameras stay reliable.">
+
+  <link rel="canonical" href="https://dapinkeye.github.io/TechToolbox-SA/guide-poe-power-budget.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://dapinkeye.github.io/TechToolbox-SA/guide-poe-power-budget.html" />
+  <meta property="og:title" content="How to Calculate PoE Power Budget" />
+  <meta property="og:description" content="Learn how to correctly calculate PoE power budget so your switches and cameras stay reliable." />
+  <meta property="og:site_name" content="TechToolbox SA" />
+  <meta property="og:locale" content="en_ZA" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><span>Tech</span>Toolbox <b>SA</b></a>
+    <nav class="nav-links">
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#guides">Guides</a>
+      <a href="index.html#about">About</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#guides">Guides</a>
+      <a href="index.html#about">About</a>
+      <a href="poe-calculator.html">PoE Calculator</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap article-page">
+  <a class="back" href="index.html#guides">← Back to guides</a>
+
+  <article class="article">
+    <p class="eyebrow">NETWORKING &amp; CCTV GUIDE</p>
+    <h1>How to calculate PoE power budget</h1>
+    <p class="meta">Avoid overloaded switches and camera brown-outs</p>
+
+    <p>Power over Ethernet (PoE) is convenient, but it is also one of the most common causes of intermittent camera problems on site. The switch simply does not have enough power budget for all the devices connected to it.</p>
+
+    <h2>Basic calculation</h2>
+    <p>Add up the power requirement of every PoE device, then add a safety margin.</p>
+
+    <div class="callout">
+      <strong>Total required = (Sum of all device wattages) × (1 + safety margin)</strong><br><br>
+      Typical safety margin: 15–25%
+    </div>
+
+    <p>You can do this quickly with the free <a href="poe-calculator.html">PoE Calculator</a> on this site.</p>
+
+    <h2>Typical power draw of common devices</h2>
+    <ul>
+      <li>Standard IP camera (no IR or heater) – 4–7 W</li>
+      <li>Camera with infrared LEDs – 8–12 W</li>
+      <li>Camera with heater / blower (outdoor) – 15–25 W or more</li>
+      <li>PTZ camera – often 20–30 W+ when moving</li>
+      <li>Wireless access point – 10–20 W</li>
+      <li>VoIP phone – 5–12 W</li>
+    </ul>
+
+    <p>Always check the manufacturer’s datasheet for the <strong>maximum</strong> power consumption, not the typical figure.</p>
+
+    <h2>PoE standards you will see</h2>
+    <ul>
+      <li><strong>802.3af (PoE)</strong> – up to 15.4 W at the switch, ~12.95 W at the device</li>
+      <li><strong>802.3at (PoE+)</strong> – up to 30 W at the switch, ~25.5 W at the device</li>
+      <li><strong>802.3bt (PoE++)</strong> – 60 W or 90–100 W depending on Type 3 or Type 4</li>
+    </ul>
+
+    <h2>Important real-world points</h2>
+    <ul>
+      <li>The power budget of a switch is the <em>total</em> power it can supply across all ports, not per port.</li>
+      <li>Many “24-port PoE switches” only have a 150–250 W total budget — they cannot run 24 high-power cameras at once.</li>
+      <li>Long cable runs (especially cheap cable) cause voltage drop, so the camera may draw more current than expected.</li>
+      <li>When a switch runs out of budget it usually starts denying power to new devices or randomly reboots existing ones.</li>
+    </ul>
+
+    <h2>Recommended practice</h2>
+    <ol>
+      <li>List every PoE device and its maximum wattage</li>
+      <li>Add them up</li>
+      <li>Add at least 20% safety margin</li>
+      <li>Choose a switch (or multiple switches) whose total PoE budget is higher than that number</li>
+      <li>If possible, leave a few spare ports and some budget for future expansion</li>
+    </ol>
+
+    <p>Doing this simple calculation before you order equipment saves a lot of call-outs later.</p>
+
+    <div class="related">
+      <h3>Related tools &amp; guides</h3>
+      <p><a href="poe-calculator.html">PoE Calculator</a></p>
+      <p><a href="guide-cctv-bandwidth.html">CCTV bandwidth basics</a></p>
+      <p><a href="cctv-storage-calculator.html">CCTV Storage Calculator</a></p>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>TechToolbox SA</strong>
+    <span>Free practical IT tools.</span>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('mobileMenu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      menu.classList.toggle('open');
+    });
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('active');
+        menu.classList.remove('open');
+      });
+    });
+  }
+</script>
+</body>
+</html>
